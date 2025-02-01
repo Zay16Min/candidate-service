@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vinsguru.candidateservice.dto.CandidateDetailsDto;
 import com.vinsguru.candidateservice.dto.CandidateDto;
 import com.vinsguru.candidateservice.service.CandidateService;
 
@@ -27,7 +28,7 @@ public class CandidateController {
 	}
 	
 	@GetMapping("{id}")
-	public Mono<CandidateDto> getById(@PathVariable String id) {
+	public Mono<CandidateDetailsDto> getById(@PathVariable String id) {
 		return this.service.getById(id);
 	}
 	

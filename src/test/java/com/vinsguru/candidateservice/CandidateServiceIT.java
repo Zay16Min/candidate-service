@@ -35,7 +35,9 @@ class CandidateServiceIT extends BaseTest {
 			.expectStatus().is2xxSuccessful()
 			.expectBody()
 			.jsonPath("$.id").isEqualTo(1)
-			.jsonPath("$.name").isEqualTo("sam");
+			.jsonPath("$.name").isEqualTo("sam")
+			.jsonPath("$.skills.size()").isEqualTo(2)
+			.jsonPath("$.recommendedJobs.size()").isEqualTo(2);
 	}
 	
 	@Test
@@ -50,6 +52,32 @@ class CandidateServiceIT extends BaseTest {
 			.jsonPath("$.id").isNotEmpty()
 			.jsonPath("$.name").isEqualTo("dr.dre");
 				
+	}
+	
+	@Test
+	void jobServiceReturns4xx() {
+		this.client.get()
+			.uri("/candidate/2")
+			.exchange()
+			.expectStatus().is2xxSuccessful()
+			.expectBody()
+			.jsonPath("$.id").isEqualTo(2)
+			.jsonPath("$.name").isEqualTo("jake")
+			.jsonPath("$.skills.size()").isEqualTo(1)
+			.jsonPath("$.recommendedJobs").isEmpty();		
+	}
+	
+	@Test
+	void jobServiceReturns5xx() {
+		this.client.get()
+			.uri("/candidate/3")
+			.exchange()
+			.expectStatus().is2xxSuccessful()
+			.expectBody()
+			.jsonPath("$.id").isEqualTo(3)
+			.jsonPath("$.name").isEqualTo("mike")
+			.jsonPath("$.skills.size()").isEqualTo(1)
+			.jsonPath("$.recommendedJobs").isEmpty();		
 	}
 	
 }
