@@ -42,7 +42,7 @@ class CandidateServiceIT extends BaseTest {
 	
 	@Test
 	void postCandidateTest() {
-		var dto = CandidateDto.create(null, "dr.dre", Set.of("k8s"));
+		var dto = CandidateDto.create(null, "dr.dre", Set.of("k8s"), null);
 		this.client.post()
 			.uri("/candidate")
 			.bodyValue(dto)
